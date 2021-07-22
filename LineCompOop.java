@@ -4,47 +4,48 @@ import java.util.Scanner;
 
 public class LineCompOop {
     public static void main(String[] args) {
-        System.out.println("Welcome To LineComparison");
-        //length of line
         Scanner sc = new Scanner(System.in);
-        System.out.println("enter the value of  co-ordinate ");
 
-        System.out.println("Enter the value of (x1,y1)= ");
-        int x1 = sc.nextInt();
-        int y1 = sc.nextInt();
-        System.out.println("Enter the value of (x2,y2)= ");
-        int x2 = sc.nextInt();
-        int y2 = sc.nextInt();
+        //Input values from user for Line A and compute the length of Line A
+        float[] input1 = inputValues(sc);
+        System.out.println("The 2 points of the line A are: (" +input1[0]+ "," +input1[1]+ ") and (" +input1[2]+ "," +input1[3]+ ")");
+        double lengthLineA = computeLength(input1);
 
-        double distanceLine1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        //Input values from user for Line B and compute the length of Line B
+        float[] input2 = inputValues(sc);
+        System.out.println("The 2 points of the line B are: (" +input2[0]+ "," +input2[1]+ ") and (" +input2[2]+ "," +input2[3]+ ")");
+        double lengthLineB = computeLength(input2);
 
-        System.out.println("lenth of line1= " + distanceLine1);
+        //Print the lengths of Line A and Line B
+        System.out.println("Length of the line A is : "+lengthLineA+ " units.");
+        System.out.println("Length of the line B is : "+lengthLineB+ " units.");
 
-        //checking equality
-        System.out.println("Enter the values next co-ordinates ");
-        System.out.println("x3= ");
-        int x3 = sc.nextInt();
-        System.out.println("y3");
-        int y3 = sc.nextInt();
-        System.out.println("x4= ");
-        int x4 = sc.nextInt();
-        System.out.println("y4= ");
-        int y4 = sc.nextInt();
+        //Compare the lengths of line A and line B
+        compareLength(lengthLineA, lengthLineB);
+    }
+    private static float[] inputValues(Scanner input) {
+        System.out.print("Enter the value of (x1,y1) and (x2,y2): ");
+        float x1=input.nextFloat();
+        float y1=input.nextFloat();
+        float x2=input.nextFloat();
+        float y2=input.nextFloat();
 
-        double distanceLine2 = Math.sqrt(Math.pow(x4 - x3, 2) + Math.pow(y4 - y3, 2));
+        return new float[] {x1, y1, x2, y2};
+    }
+    private static double computeLength(float[] input) {
+        double lengthLine = Math.sqrt(Math.pow(input[2] - input[0], 2) + Math.pow(input[3] - input[1], 2));
 
-        System.out.println("lenth of line1= " + distanceLine1);
-        System.out.println("Length of line 2 = " + distanceLine2);
+        return lengthLine;
+    }
+    private static void compareLength(double lengthLineA, double lengthLineB) {
+        String lineA = String.valueOf(lengthLineA);
+        String lineB = String.valueOf(lengthLineB);
 
-        if (distanceLine1<distanceLine2) {
-            System.out.println("Line1 is less than Line2");
-        }
-        else if (distanceLine1>distanceLine2) {
-            System.out.println("Line1 is greater than line2");
-        }
-        else {
-            System.out.println("Two lines are Equal");
-
-        }
+        if(lineA.compareTo(lineB) == 0)
+            System.out.println("Line A and Line B are equal");
+        else if(lineA.compareTo(lineB) > 0)
+            System.out.println("Line A is greater than Line B");
+        else if (lineB.compareTo(lineA) > 0)
+            System.out.println("Line B is greater than Line A");
     }
 }
